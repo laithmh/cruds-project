@@ -38,22 +38,25 @@ submint.onclick = function () {
     count: count.value,
     category: category.value.toLowerCase(),
   };
-  if (mood === "create") {
-    if (newpro.count > 1) {
-      for (let index = 0; index < newpro.count; index++) {
-        datapro.push(newpro);
+  if (title.value!="" && price.value!="" && category!="") {
+    if (mood === "create") {
+        if (newpro.count > 1) {
+          for (let index = 0; index < newpro.count; index++) {
+            datapro.push(newpro);
+          }
+        } else {
+          datapro.push(newpro);
+        }
+      } else {
+        datapro[temp] = newpro;
+        mood = "create";
+        submint.innerHTML = "create";
+        count.style.display = "block";
       }
-    } else {
-      datapro.push(newpro);
-    }
-  } else {
-    datapro[temp] = newpro;
-    mood = "create";
-    submint.innerHTML = "create";
-    count.style.display = "block";
-  }
+      cleardata();
+  } 
   localStorage.setItem("prodact", JSON.stringify(datapro));
-  cleardata();
+  
   showdata();
 };
 function cleardata() {
